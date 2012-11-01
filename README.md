@@ -15,34 +15,37 @@ Install
 
 Code
 
-``` coffee
+```
 
 MailListener = require "mail-listener"
 
-mailListener = new MailListener
-  username: "imap-username"
-  password: "imap-password"
-  host: "imap-host"
-  port: 993 # imap port
-  secure: true # use secure connection
-
-
- # start listener. You can stop it calling `stop method`
+mailListener = new MailListener({
+  username: "imap-username",
+  password: "imap-password",
+  host: "imap-host",
+  port: 993, // imap port
+  secure: true // use secure connection
+});
+  
+// start listener. You can stop it calling `stop method`
 mailListener.start()
 
-# subscribe to server connected event
-mailListener.on "server:connected", ->
-  console.log "imap connected"
+// subscribe to server connected event
+mailListener.on("server:connected", function(){
+  console.log("imap connected");
+});
 
-# subscribe to error events
-mailListener.on "error", (err) ->
-  console.log "error happened", err
+// subscribe to error events
+mailListener.on("error", function(err){
+  console.log("error happened", err);
+});
 
-# mail arrived and was parsed by parser 
-mailListener.on "mail:parsed", (mail) ->
-  # do something with mail object including attachments
-  console.log "parsed email with attachment", mail.attachments.length
+// mail arrived and was parsed by parser 
+mailListener.on("mail:parsed", function(mail){
+  // do something with mail object including attachments
+  console.log("parsed email with attachment", mail.attachments.length);
   ...
+});
 ```
 
 That's easy!
